@@ -5,7 +5,9 @@ import { Home } from './components/pages/Home'
 import { Contact } from './components/pages/Contact'
 import { Cart } from './components/pages/Cart'
 import { ProductLayout } from './components/pages/ProductLayout'
-import { SignUp } from './components/auth/SignNup'
+import { SignUp } from './components/auth/SignUp'
+import { Login } from './components/auth/Login'
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +32,11 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />
-      }
+      },
+      {
+        path: '/login',
+        element: <Login />
+      }, 
     ]
 
   }
