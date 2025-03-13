@@ -1,0 +1,13 @@
+[33mcf783cb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m HEAD@{0}: commit: Resolved merge conflicts
+[33m8cf8d22[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: pull --no-rebase origin main: Fast-forward
+[33mbc06027[m HEAD@{2}: rebase (abort): returning to refs/heads/main
+[33m6b3f8fe[m HEAD@{3}: commit: ProductInfo
+[33maa93d69[m HEAD@{4}: reset: moving to origin/main
+[33m8a388ee[m HEAD@{5}: commit: Routing
+[33mf52c03c[m HEAD@{6}: commit: Routing
+[33ma7480ba[m HEAD@{7}: pull origin main --rebase (start): checkout a7480ba51995803076a8735d3e1e1700368674cd
+[33mbc06027[m HEAD@{8}: commit: pages
+[33m1b8ed31[m HEAD@{9}: pull origin main: Fast-forward
+[33me2ecdd5[m HEAD@{10}: commit: Setup
+[33mcb4e8c6[m HEAD@{11}: commit: Setup
+[33m15d4102[m HEAD@{12}: clone: from https://github.com/sakshi5925/CartNexus.git
