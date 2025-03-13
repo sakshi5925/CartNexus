@@ -4,6 +4,8 @@ import { AppLayout } from './components/layout/AppLayout'
 import { Home } from './components/pages/Home'
 import { Contact } from './components/pages/Contact'
 import { Cart } from './components/pages/Cart'
+
+import { Login } from './components/auth/Login'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,9 +20,17 @@ const router = createBrowserRouter([
         element: <Contact />
       },
       {
-        path: 'cart',
+        path: '/cart',
         element: <Cart />
-      }
+      },
+      {
+        path: '/login',
+        element: <Login />
+      }, 
+      // {
+      //   path: '/signup',
+      //   // element: <SignUp />
+      // }
     ]
 
   }
