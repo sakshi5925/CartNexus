@@ -1,55 +1,14 @@
 import React, { useState } from 'react';
 import { Rating, Stack } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 export const ProductLayout = () => {
-  const product = {
-    id: 78,
-    title: "Apple MacBook Pro 14 Inch - Space Grey",
-    description:
-      "The MacBook Pro 14 Inch in Space Grey is a powerful and sleek laptop, featuring Apple's M1 Pro chip for exceptional performance and a stunning Retina display.",
-    category: "laptops",
-    price: 1999.99,
-    monthlyPrice: 333.33,
-    discountPercentage: 9.25,
-    rating: 3.9,
-    review: 320,
-    stock: 15,
-    brand: "Apple",
-    warrantyInformation: "1 Year Apple Warranty",
-    shippingInformation: "Ships in 1 week",
-    returnPolicy: "30 days free return",
-    images: [
-      "https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/1.png",
-      "https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/2.png",
-      "https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/3.png",
-    ],
-    thumbnail:
-      "https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/thumbnail.png",
+  const location = useLocation();
+  const product = location.state?.product;  // Retrieve product from state
 
-    reviews: [
-      {
-        "rating": 5,
-        "comment": "Would buy again!",
-        "date": "2024-05-23T08:56:21.622Z",
-        "reviewerName": "Hunter Gordon",
-        "reviewerEmail": "hunter.gordon@x.dummyjson.com"
-      },
-      {
-        "rating": 5,
-        "comment": "Would buy again!",
-        "date": "2024-05-23T08:56:21.622Z",
-        "reviewerName": "Emma Wilson",
-        "reviewerEmail": "emma.wilson@x.dummyjson.com"
-      },
-      {
-        "rating": 5,
-        "comment": "Very pleased!",
-        "date": "2024-05-23T08:56:21.622Z",
-        "reviewerName": "David Martinez",
-        "reviewerEmail": "david.martinez@x.dummyjson.com"
-      }
-    ]
-  };
+  if (!product) {
+    return <p>Product not found!</p>; // Handle case where no product is passed
+  }
 
   const [selectedImage, setSelectedImage] = useState(product.thumbnail);
   const [quantity, setQuantity] = useState(1);

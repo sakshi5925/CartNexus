@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const handleButtonClick = () => {
-        navigate('/productInfo');
+        navigate('/productInfo', { state: { product } });
     }
     return (
         <div className="w-[16rem] rounded-lg border border-gray-300 m-3 shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-lg bg-white">

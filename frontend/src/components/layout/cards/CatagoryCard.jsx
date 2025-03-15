@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const CatagoryCard = () => {
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,6 +22,11 @@ export const CatagoryCard = () => {
     fetchData();
   }, []);
 
+  // Navigate to shopping page with category
+  const handleButtonClick = (categoryName) => {
+    navigate(`/shopping/${categoryName.toLowerCase()}`);
+  };
+
   return (
     <div className="flex flex-wrap justify-center gap-8 mt-6 p-5">
       {categories.map((category, index) => (
@@ -33,7 +40,6 @@ export const CatagoryCard = () => {
             style={{ backgroundImage: `url(${category.image || "https://via.placeholder.com/150"})` }}
           ></div>
 
-
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
 
@@ -43,11 +49,14 @@ export const CatagoryCard = () => {
           </h2>
 
           {/* Explore Button */}
-          <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-semibold px-4 py-2 rounded-full shadow-md hover:bg-gray-900 hover:text-white transition-all duration-300">
+          <button 
+            onClick={() => handleButtonClick(category.name)}
+            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-semibold px-4 py-2 rounded-full shadow-md hover:bg-gray-900 hover:text-white transition-all duration-300"
+          >
             Explore
           </button>
         </div>
-      ))}
+      ))}x
     </div>
   );
 };

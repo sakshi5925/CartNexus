@@ -2,8 +2,11 @@ import express from 'express'
 import dotenv from 'dotenv'
 import { productRoutes } from './routes/productRoutes.js';
 import cors from 'cors'
+import { connectToDatabase } from './config/connectionToDatabase.js';
 
 dotenv.config();
+
+connectToDatabase();
 const app = express();
 
 app.use(express.json());
