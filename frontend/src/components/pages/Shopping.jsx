@@ -5,19 +5,22 @@ export const Shopping = () => {
     const [products, setProducts] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const ds = 'mens-shoes'
+        const fetchData = async (category) => {
             try {
-                const response = await fetch('https://dummyjson.com/products');
+                const response = await fetch(`http://localhost:3000/product/${category}`);
                 const data = await response.json();
+                console.log(data.data);
                 if (!response.ok) {
                     throw new Error(data.error || 'Failed to fetch profile');
                 }
-                setProducts(data.products);
+                setProducts(data.data);
+                console.log(products);
             } catch (error) {
                 console.log('Error in fetching the product', error);
             }
         }
-        fetchData();
+        fetchData(ds);
     }, [])
     console.log(products);
     if (!products) return <h1>Loading</h1>
