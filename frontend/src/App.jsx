@@ -7,6 +7,7 @@ import { Cart } from './components/pages/Cart'
 import { ProductLayout } from './components/pages/ProductLayout'
 import { SignUp } from './components/auth/SignUp'
 import { Login } from './components/auth/Login'
+import { Shopping } from './components/pages/Shopping'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         path: '/login',
         element: <Login />
       }, 
+      {
+        path: '/shopping',
+        element: <Shopping />
+      }
     ]
 
   }
