@@ -53,7 +53,7 @@ export const Navbar = () => {
         </div>
         <div className="flex items-center gap-2 cursor-pointer hover:text-indigo-600 transition">
           <IoCartOutline className="text-2xl" />
-          <span>Cart</span>
+          <NavLink to='/cart'>Cart</NavLink>
         </div>
       </div>
     </nav>
