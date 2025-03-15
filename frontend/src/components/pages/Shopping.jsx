@@ -1,39 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ProductCard } from '../layout/cards/ProductCard';
 
 export const Shopping = () => {
+    const { id } = useParams();  // Get category from URL
     const [products, setProducts] = useState(null);
+    const category = id || 'all';  // Default to 'all' if no category is provided
 
     useEffect(() => {
-        const ds = 'mens-shoes'
-        const fetchData = async (category) => {
+        const fetchData = async () => {
             try {
                 const response = await fetch(`http://localhost:3000/product/${category}`);
                 const data = await response.json();
-                console.log(data.data);
+
                 if (!response.ok) {
-                    throw new Error(data.error || 'Failed to fetch profile');
+                    throw new Error(data.error || 'Failed to fetch products');
                 }
                 setProducts(data.data);
-                console.log(products);
             } catch (error) {
                 console.log('Error in fetching the product', error);
             }
-        }
-        fetchData(ds);
-    }, [])
-    console.log(products);
-    if (!products) return <h1>Loading</h1>
+        };
+        fetchData();
+    }, [category]);
+
+    if (!products) return <h1>Loading...</h1>;
+
     return (
         <div className='flex flex-wrap justify-center mt-4'>
-            {
-                products.map((product, index) => (
-                    <ProductCard
-                        key={product.id}
-                        product={product}
-                    />
+            {products.length > 0 ? (
+                products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
                 ))
-            }
+            ) : (
+                <h2>No products found</h2>
+            )}
         </div>
-    )
-}
+    );
+};

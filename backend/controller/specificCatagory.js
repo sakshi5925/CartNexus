@@ -1,25 +1,33 @@
 import axios from "axios";
 
-export const SpecificProducts = async(req,res) => {
+export const SpecificProducts = async (req, res) => {
     try {
-        const catagory = req.params.id;
-        console.log(catagory);
+        const category = req.params.id; // Extract category from URL
+        console.log("Category:", category);
 
-        // if catagory is not mentioned
-        if(!catagory) return res.status(400).json({error: 'Catagory is required'});
-    
-        // fetch all the products 
+        // Fetch all the products 
         const response = await axios.get("https://dummyjson.com/products?limit=200");
         const allProducts = response.data.products;
-        
-        // filter Product of specific catagory
-        const filterProduct = allProducts.filter(product => product.category.toLowerCase() === catagory.toLowerCase());
-        res.status(200).json({
+
+        // If no category is provided, return all products
+        if (!category || category === "all") {
+            return res.status(200).json({
+                success: true,
+                data: allProducts
+            });
+        } 
+
+        // Filter products based on category
+        const filteredProducts = allProducts.filter(product => 
+            product.category.toLowerCase() === category.toLowerCase()
+        );
+
+        return res.status(200).json({
             success: true,
-            data: filterProduct
-        })
+            data: filteredProducts
+        });
+
     } catch (error) {
-        res.status(500).json({ error: "Failed to fetch products" });        
+        res.status(500).json({ error: "Failed to fetch products" });
     }
-   
-}
+};

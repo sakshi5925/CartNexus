@@ -2,9 +2,16 @@ import React from 'react';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { CgProfile } from "react-icons/cg";
 import { IoCartOutline } from "react-icons/io5";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+  const navigate = useNavigate();
+
+  // Function to navigate to selected category
+  const handleCategoryClick = (category) => {
+    navigate(`/shopping/${category.toLowerCase()}`);
+  };
+
   return (
     <nav className="top-0 left-0 w-full bg-white shadow-md px-8 py-3 flex items-center justify-between z-50">
       <div className="flex items-center gap-2 text-xl font-bold text-gray-800">
@@ -18,21 +25,21 @@ export const Navbar = () => {
             Category
           </PopoverTrigger>
           <PopoverContent className="bg-white p-2 shadow-lg rounded-md w-36">
-            <p className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Beauty</p>
-            <p className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Furniture</p>
-            <p className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Electronics</p>
-            <p className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Dress</p>
+            <p onClick={() => handleCategoryClick("Beauty")} className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Beauty</p>
+            <p onClick={() => handleCategoryClick("Furniture")} className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Furniture</p>
+            <p onClick={() => handleCategoryClick("Electronics")} className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Electronics</p>
+            <p onClick={() => handleCategoryClick("Dress")} className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Dress</p>
           </PopoverContent>
         </Popover>
 
         <ul className="flex gap-5 text-gray-700 font-medium">
-          <NavLink className="relative after:block after:w-0 after:h-[2px] after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full hover:text-indigo-600 transition">
+          <NavLink to="/" className="relative after:block after:w-0 after:h-[2px] after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full hover:text-indigo-600 transition">
             Deals
           </NavLink>
-          <NavLink to='/shopping' className="relative after:block after:w-0 after:h-[2px] after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full hover:text-indigo-600 transition">
+          <NavLink to='/shopping/all' className="relative after:block after:w-0 after:h-[2px] after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full hover:text-indigo-600 transition">
             Shopping
           </NavLink>
-          <NavLink className="relative after:block after:w-0 after:h-[2px] after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full hover:text-indigo-600 transition">
+          <NavLink to="/delivery" className="relative after:block after:w-0 after:h-[2px] after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full hover:text-indigo-600 transition">
             Delivery
           </NavLink>
         </ul>
