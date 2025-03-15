@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { CgProfile } from "react-icons/cg";
 import { IoCartOutline } from "react-icons/io5";
 import { NavLink, useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+    const [categories, setCategories] = useState([]);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch("http://localhost:3000/product/catagory");
+          if (!response.ok) {
+            throw new Error("Failed to fetch categories");
+          }
+          const data = await response.json();
+          setCategories(data);
+          console.log("Fetched Categories:", data);
+        } catch (error) {
+          console.error("Error fetching categories:", error);
+        }
+      };
+      fetchData();
+    }, []);
   const navigate = useNavigate();
 
   // Function to navigate to selected category
-  const handleCategoryClick = (category) => {
+  const handleButtonClick = (category) => {
     navigate(`/shopping/${category.toLowerCase()}`);
   };
 
@@ -24,11 +42,10 @@ export const Navbar = () => {
           <PopoverTrigger className="cursor-pointer text-gray-700 font-medium hover:text-indigo-600 transition relative after:block after:w-0 after:h-[2px] after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full">
             Category
           </PopoverTrigger>
-          <PopoverContent className="bg-white p-2 shadow-lg rounded-md w-36">
-            <p onClick={() => handleCategoryClick("Beauty")} className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Beauty</p>
-            <p onClick={() => handleCategoryClick("Furniture")} className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Furniture</p>
-            <p onClick={() => handleCategoryClick("Electronics")} className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Electronics</p>
-            <p onClick={() => handleCategoryClick("Dress")} className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer">Dress</p>
+          <PopoverContent className="bg-white p-2 shadow-lg rounded-md w-[50rem] flex flex-wrap">
+          {categories.map((category, index) => (
+       <button  key={index} onClick={()=>handleButtonClick(category.name)}  className="hover:bg-indigo-100 p-2 rounded-md cursor-pointer border-2 m-2">{category.name}</button>
+      ))}
           </PopoverContent>
         </Popover>
 
