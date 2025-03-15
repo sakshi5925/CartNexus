@@ -1,11 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
 export const CatagoryCard = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/product/catagory");
+        if (!response.ok) {
+          throw new Error("Failed to fetch categories");
+        }
+        const data = await response.json();
+        setCategories(data);
+        console.log("Fetched Categories:", data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="h-72 w-56 bg-slate-200 rounded-xl bg-cover bg-[url('/images/img2.png')] flex flex-col justify-between items-center transition-transform duration-300  hover:scale-110">
-        <h2 className='text-center mt-3 text-xl font-bold text-white'>Furniture</h2>
-        <button className='font-semibold text-sm bg-black p-2 w-20 rounded-3xl text-white mb-3 '>Explore</button>
-       
+    <div className="flex flex-wrap justify-center gap-8 mt-6 p-5">
+      {categories.map((category, index) => (
+        <div
+          key={index}
+          className="relative h-72 w-56 rounded-xl overflow-hidden shadow-lg border border-gray-300 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl"
+        >
+          {/* Background Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${category.image || "https://via.placeholder.com/150"})` }}
+          ></div>
+
+
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+
+          {/* Category Name */}
+          <h2 className="absolute bottom-16 left-0 right-0 text-center text-xl font-bold text-white">
+            {category.name}
+          </h2>
+
+          {/* Explore Button */}
+          <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white text-black font-semibold px-4 py-2 rounded-full shadow-md hover:bg-gray-900 hover:text-white transition-all duration-300">
+            Explore
+          </button>
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};

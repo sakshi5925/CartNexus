@@ -25,13 +25,9 @@ export const ProductCatagory = () => {
         <h1 className='mt-2 font-bold text-2xl'>
             Shop Our Top Categories
         </h1>
-        <div className='flex mt-6 justify-between'>
-            {
-                array.map((index, element) => (
+      
                     <CatagoryCard />
-                )) 
-            }
-        </div>
+               
             </div>
     )
 }
