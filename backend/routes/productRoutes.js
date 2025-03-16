@@ -5,6 +5,6 @@ import { AddToCart, getProduct } from '../controller/productController.js';
 export const productRoutes = express.Router();
 
 productRoutes.get('/catagory', Catagory)
-productRoutes.get('/:id', SpecificProducts);
+productRoutes.get('/specific/:id', SpecificProducts);
 productRoutes.post('/add',AddToCart);
-productRoutes.get('/getallProduct', getProduct);
+productRoutes.get('/getproduct', getProduct);

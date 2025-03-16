@@ -10,7 +10,7 @@ export const Shopping = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/product/${category}`);
+                const response = await fetch(`http://localhost:3000/product/specific/${category}`);
                 const data = await response.json();
 
                 if (!response.ok) {
