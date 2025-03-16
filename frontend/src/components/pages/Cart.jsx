@@ -1,30 +1,41 @@
-import React from 'react'
-import { Paymentprocess, Pricedetail, Productdetails } from '../layout/CartLayout'
-
+import React, { useEffect, useState } from 'react';
+import { Paymentprocess, Pricedetail, Productdetails } from '../layout/CartLayout';
 
 export const Cart = () => {
-  const product = {
-    title: "Apple MacBook Pro 14 Inch - Space Grey",
-    description:
-      "The MacBook Pro 14 Inch in Space Grey is a powerful and sleek laptop, featuring Apple's M1 Pro chip for exceptional performance and a stunning Retina display.", 
-    price: 1999.99,
+  const [products, setProducts] = useState([]); // Initialize as an empty array
 
-    discountPercentage: 9.25,
-    warrantyInformation: "1 Year Apple Warranty",
-    shippingInformation: "Ships in 1 week",
-    returnPolicy: "30 days free return",
-    images: 
-    "https://cdn.dummyjson.com/products/images/laptops/Apple%20MacBook%20Pro%2014%20Inch%20Space%20Grey/thumbnail.png",
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/product/getallproduct');
+        const data = await response.json();
+
+        if (data.success) {
+          setProducts(data.products); // Store all products in state
+        } else {
+          console.error("No products found");
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-      <>
-          <Paymentprocess />
-          <div className='flex'>
-            <Productdetails
-                product = {product}   
-            />
-            <Pricedetail/>
-          </div>
-        </>
-  )
-}
+    <>
+      <Paymentprocess />
+      <div className='flex flex-wrap gap-4'>
+        {products.length > 0 ? (
+          products.map((product) => (
+            <Productdetails key={product._id} product={product} />
+          ))
+        ) : (
+          <p>Loading product details...</p>
+        )}
+      </div>
+      <Pricedetail />
+    </>
+  );
+};
