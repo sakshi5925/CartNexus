@@ -57,12 +57,7 @@ export const Navbar = () => {
                 onClick={() => handleCategoryClick(category.name)}
                 className="flex flex-col items-center p-2 rounded-md cursor-pointer border-2 m-2 hover:bg-indigo-100"
               >
-                <img
-                  src={category.image} // Assuming the API provides an image URL
-                  alt={category.name}
-                  className="w-16 h-16 object-cover rounded-md mb-2"
-                />
-                <span>{category.name}</span>
+                {category.name}
               </button>
             ))}
           </PopoverContent>
