@@ -50,19 +50,14 @@ export const Navbar = () => {
           <PopoverTrigger className="cursor-pointer text-gray-700 font-medium hover:text-indigo-600 transition relative after:block after:w-0 after:h-[2px] after:bg-indigo-600 after:transition-all after:duration-300 hover:after:w-full">
             Category
           </PopoverTrigger>
-          <PopoverContent className="bg-white p-2 shadow-lg rounded-md w-[50rem] flex flex-wrap">
+          <PopoverContent className="bg-white p-2 shadow-lg rounded-md w-[45rem] flex flex-wrap">
             {categories.map((category, index) => (
               <button
                 key={index}
                 onClick={() => handleCategoryClick(category.name)}
                 className="flex flex-col items-center p-2 rounded-md cursor-pointer border-2 m-2 hover:bg-indigo-100"
               >
-                <img
-                  src={category.image} // Assuming the API provides an image URL
-                  alt={category.name}
-                  className="w-16 h-16 object-cover rounded-md mb-2"
-                />
-                <span>{category.name}</span>
+                {category.name}
               </button>
             ))}
           </PopoverContent>

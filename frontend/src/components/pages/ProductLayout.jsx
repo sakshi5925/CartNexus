@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 export const ProductLayout = () => {
   const location = useLocation();
   const product = location.state?.product;  // Retrieve product from state
+  console.log(product);
 
   if (!product) {
     return <p>Product not found!</p>; // Handle case where no product is passed
