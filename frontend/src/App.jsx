@@ -8,6 +8,9 @@ import { ProductLayout } from './components/pages/ProductLayout'
 import { SignUp } from './components/auth/SignUp'
 import { Login } from './components/auth/Login'
 import { Shopping } from './components/pages/Shopping'
+import { Address } from './components/pages/address'
+import { Payment } from './components/pages/payment'
+import { OrderDetails } from './components/pages/orderdetails'
 
 const router = createBrowserRouter([
   {
@@ -24,7 +27,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/cart',
-        element: <Cart />
+        element: <Cart />,
+        children:[
+          {path:'address',element:<Address/>},
+          {path:'payment',element:<Payment/>},
+          {path:'orderdetails',element:<OrderDetails/>}
+        ]
       },
       {
         path: "/productinfo",

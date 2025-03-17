@@ -5,26 +5,21 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import { RiDiscountPercentLine } from "react-icons/ri";
 
-const steps = [
-  'Cart',
-  'Address',
-  'Payment',
-  'Summary',
-];
+const steps = ['Cart', 'Address', 'Payment', 'Summary'];
 
-export const Paymentprocess = () => {
+export const Paymentprocess = ({ step }) => {
   return (
     <Box sx={{ width: '100%' }} className="mt-7">
-      <Stepper activeStep={1} alternativeLabel>
-        {steps.map((label) => (
+      <Stepper activeStep={step} alternativeLabel>
+        {steps.map((label, index) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
     </Box>
-  )
-}
+  );
+};
 
 const Temp = ({ product }) => {
   return (
