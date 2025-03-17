@@ -1,5 +1,5 @@
 import { Product } from "../modules/product.js";
-
+import mongoose from "mongoose";
 export const AddToCart = async (req, res) => {
   try {
     const {
@@ -69,10 +69,11 @@ export const AddToCart = async (req, res) => {
 
 export const getProduct = async (req, res) => {
   try {
-    const products = await Product.find();
-    
-    console.log("Fetched Products:", products); // Add this debug log
-    
+    const products = await mongoose.connection.db.collection("products").find({}).toArray();
+    console.log("Direct DB Query Result:", products);
+
+
+
     if (products.length === 0) {
       return res.status(200).json({
         success: true,
