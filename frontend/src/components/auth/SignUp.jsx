@@ -11,41 +11,48 @@ export const SignUp = () => {
   };
 
   return (
-    <div className='bg-slate-400 h-[500px] w-96 rounded-3xl'>
-      <h2 className='p-6 text-3xl font-bold'>Create Your Account</h2>
-      <div>
-        <form onSubmit={handleSubmit} className='flex flex-col text-black gap-6 p-7'>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-blue-600">
+      <div className="bg-white shadow-lg rounded-3xl p-8 w-96">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Create Your Account</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <input 
-            className='p-2 border-2 text-black w-60 rounded-xl' 
-            type="text" 
-            placeholder='Enter your Full Name' 
-            value={fullName} 
-            onChange={(e) => setFullName(e.target.value)} 
+            className="p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition duration-300"
+            type="text"
+            placeholder="Enter your Full Name"
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
             required
             autoComplete="name"
           />
           <input 
-            className='p-2 border-2 text-black w-60 rounded-xl' 
-            type="email" 
-            placeholder='Enter your Email' 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
+            className="p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition duration-300"
+            type="email"
+            placeholder="Enter your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             autoComplete="username"
           />
-         <input 
-            className='p-2 border-2 text-black w-60 rounded-xl' 
-            type="password" 
-            placeholder='Password' 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
+          <input 
+            className="p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition duration-300"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
             autoComplete="new-password"
           />
-          <button className='text-sm font-bold bg-blue-600 w-20 p-2 rounded-full' type="submit">
-            Submit
+          <button 
+            className="bg-green-600 text-white font-bold py-2 rounded-full hover:bg-green-700 transition duration-300"
+            type="submit"
+          >
+            Sign Up
           </button>
         </form>
+        <p className="text-gray-600 text-sm text-center mt-4">
+          Already have an account?{" "}
+          <a href="#" className="text-green-600 hover:underline">Login</a>
+        </p>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export const Cart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/product/getallproduct');
+        const response = await fetch('http://localhost:3000/product/getallProduct');
         const data = await response.json();
 
         if (data.success) {
