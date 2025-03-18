@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Paymentprocess, Pricedetail } from '../layout/CartLayout';
-import { Address } from './Address';
-import { Payment } from './Payment';
-import { OrderDetails } from './OrderDetails';
 import { Productdetails } from '../layout/CartLayout';
+import { Address } from './address';
+import { Payment } from './payment';
+import { OrderDetails } from './orderdetails';
 
 export const Cart = () => {
   const [products, setProducts] = useState([]);

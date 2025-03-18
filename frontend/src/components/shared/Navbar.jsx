@@ -5,6 +5,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { NavLink, useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+  const user = false;
   const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -93,7 +94,7 @@ export const Navbar = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="rounded-full px-4 py-2 w-60 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition shadow-sm"
         />
-        
+
         {/* Search results dropdown */}
         {searchTerm && filteredCategories.length > 0 && (
           <div className="absolute top-full left-0 w-full bg-white border border-gray-300 rounded-md mt-1 shadow-lg max-h-60 overflow-y-auto">
@@ -116,10 +117,59 @@ export const Navbar = () => {
       </div>
 
       <div className="flex gap-6 items-center text-gray-700 font-medium">
-        <div className="flex items-center gap-2 cursor-pointer hover:text-indigo-600 transition">
-          <CgProfile className="text-2xl" />
-          <span>Account</span>
-        </div>
+        <Popover>
+          <PopoverTrigger>
+            <div className="flex items-center gap-2 cursor-pointer hover:text-indigo-600 transition">
+              <CgProfile className="text-2xl" />
+              <span>Account</span>
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="bg-white p-4 rounded-lg shadow-lg w-48 border border-gray-200">
+            {user ? (
+              <div className="flex flex-col space-y-2">
+                <NavLink
+                  to="/profile"
+                  className="block text-gray-700 px-4 py-2 rounded-md hover:bg-indigo-100 transition"
+                >
+                  View Profile
+                </NavLink>
+                <NavLink
+                  to="/profile"
+                  className="block text-gray-700 px-4 py-2 rounded-md hover:bg-indigo-100 transition"
+                >
+                  Order Details
+                </NavLink>
+                <NavLink
+                  to="/logout"
+                  className="block text-gray-700 px-4 py-2 rounded-md hover:bg-red-100 transition"
+                >
+                  Log Out
+                </NavLink>
+                <NavLink
+                  to="/profile"
+                  className="block text-gray-700 px-4 py-2 rounded-md hover:bg-indigo-100 transition"
+                >
+                  Switch Account
+                </NavLink>
+              </div>
+            ) : (
+              <div className="flex flex-col space-y-2">
+                <NavLink 
+                  to="/login"
+                  className="block text-gray-700 px-4 py-2 rounded-md hover:bg-indigo-100 transition"
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  to="/signup"
+                  className="block text-gray-700 px-4 py-2 rounded-md hover:bg-indigo-100 transition"
+                >
+                  Sign Up
+                </NavLink>
+              </div>
+            )}
+          </PopoverContent>
+        </Popover>
         <div className="flex items-center gap-2 cursor-pointer hover:text-indigo-600 transition">
           <IoCartOutline className="text-2xl" />
           <NavLink to="/cart">Cart</NavLink>
