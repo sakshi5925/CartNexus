@@ -11,7 +11,7 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-blue-600">
+    <div className="flewx items-center justify-center min-h-screen bg-gradient-to-r from-green-400 to-blue-600">
       <div className="bg-white shadow-lg rounded-3xl p-8 w-96">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Create Your Account</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
