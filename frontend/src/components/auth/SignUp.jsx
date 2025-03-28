@@ -1,13 +1,43 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    password: ""
+  });
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(fullName, email, password);
+
+    try {
+      const response = await fetch('http://localhost:3000/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: data.username,
+          email: data.email,
+          password: data.password
+        }) // Convert body to JSON string
+      });
+
+      const responseData = await response.json(); // Avoid redeclaring 'data'
+
+      if (!response.ok) {
+        throw new Error(responseData.error || 'Signup failed');
+      }
+
+      alert('Signup successful!');
+      navigate('/login');
+    } catch (error) {
+      console.log("Error: ", error);
+      alert('Failed to Register');
+    }
   };
 
   return (
@@ -19,8 +49,8 @@ export const SignUp = () => {
             className="p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition duration-300"
             type="text"
             placeholder="Enter your Full Name"
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={data.username}
+            onChange={(e) => setData((prev) => ({ ...prev, username: e.target.value }))}
             required
             autoComplete="name"
           />
@@ -28,8 +58,8 @@ export const SignUp = () => {
             className="p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition duration-300"
             type="email"
             placeholder="Enter your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={data.email}
+            onChange={(e) => setData((prev) => ({ ...prev, email: e.target.value }))}
             required
             autoComplete="username"
           />
@@ -37,8 +67,8 @@ export const SignUp = () => {
             className="p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition duration-300"
             type="password"
             placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={data.password}
+            onChange={(e) => setData((prev) => ({ ...prev, password: e.target.value }))}
             required
             autoComplete="new-password"
           />
