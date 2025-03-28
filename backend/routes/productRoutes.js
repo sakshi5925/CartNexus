@@ -7,5 +7,5 @@ export const productRoutes = express.Router();
 
 productRoutes.get('/catagory', Catagory)
 productRoutes.get('/specific/:id', SpecificProducts);
-productRoutes.post('/add',AddToCart);
-productRoutes.get('/getproduct', getProduct);
+productRoutes.post('/add/:id',AddToCart);
+productRoutes.get('/getproduct/:id', getProduct);

@@ -6,11 +6,6 @@ const orderSchema = new mongoose.Schema({
         ref: "User", 
         required: true
     },
-    orderId: {
-        type: String,
-        required: true,
-        unique: true
-    },
     paymentMethod: {
         type: String,
         enum: ["Credit Card", "Debit Card", "UPI", "Net Banking", "COD"],

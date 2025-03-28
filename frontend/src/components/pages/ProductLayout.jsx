@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Rating, Stack } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const ProductLayout = () => {
@@ -22,6 +22,8 @@ export const ProductLayout = () => {
     productCount: 1,
     stock: 0,
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (product && Object.keys(product).length > 0) {
@@ -72,9 +74,17 @@ export const ProductLayout = () => {
   };
 
   const handleCartbutton = async () => {
+    const token = localStorage.getItem("authToken");
+    if(!token) {
+      alert('Login First');
+      navigate('/login');
+      return;
+    }
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+    const id = decodedToken.id
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3000/product/add", data, {
+      const response = await axios.post(`http://localhost:3000/product/add/${id}`, data, {
         headers: {
           "Content-Type": "application/json",
         },

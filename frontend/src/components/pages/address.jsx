@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
 export const Address = () => {
+  const token = localStorage.getItem("authToken");
+  const decodedToken = JSON.parse(atob(token.split(".")[1])); // Decode payload
+  console.log(decodedToken);
   const [formData, setFormData] = useState({
     fullName: "",
     mobileNumber: "",
@@ -11,8 +14,8 @@ export const Address = () => {
     city: "",
     state: "",
     defaultAddress: false,
+    email: decodedToken.email
   });
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -21,9 +24,32 @@ export const Address = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Address Submitted:", formData);
+    try {
+      const response=await fetch("http://localhost:3000/user/address",{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(
+          formData
+        )
+      })
+
+      const responseData=await response.json();
+      if(!responseData.success){
+        throw new Error(responseData.error)
+      }
+
+      alert('Address set Successfully')
+    } catch (error) {
+      console.log('Error : ', error);
+      alert('failed to add address')
+      
+    }
+
   };
 
   return (

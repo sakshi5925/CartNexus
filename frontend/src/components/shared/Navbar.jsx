@@ -12,7 +12,7 @@ export const Navbar = () => {
   useEffect(() => {
     // Check if user is logged in by looking for the auth token
     const token = localStorage.getItem("authToken");
-    console.log(token);
+    // console.log(token);
     if (token) {
       setUser(true); // Set user state to true if token exists
     } else {
@@ -36,6 +36,16 @@ export const Navbar = () => {
     };
     fetchData();
   }, []);
+
+  const handleCartButton = () => {
+    const token = localStorage.getItem('authToken');
+    if(!token) {
+      alert('Need to Login First');
+      navigate('/login');
+      return;
+    }
+    navigate('/cart');
+  }
 
   const handleLogout = () => {
     localStorage.removeItem("authToken"); // Remove token
@@ -188,7 +198,7 @@ export const Navbar = () => {
         </Popover>
         <div className="flex items-center gap-2 cursor-pointer hover:text-indigo-600 transition">
           <IoCartOutline className="text-2xl" />
-          <NavLink to="/cart">Cart</NavLink>
+          <button onClick={handleCartButton} >Cart</button>
         </div>
       </div>
     </nav>

@@ -46,10 +46,13 @@ export const LoginUser = async (req,res) => {
     bcrypt.compare(password,user.password,function(err,result){
         if(result){
             let token= generateToken(user);
+            console.log(token);
             res.cookie("token",token);
+            const email = user.email;
             res.status(201).json({
                 success: true,
-                message: "User login Successfully"
+                message: "User login Successfully",
+                token,
             })
                  
         }

@@ -1,36 +1,41 @@
 import mongoose from "mongoose"
-const productSchema= mongoose.Schema({
+const productSchema = mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
     id: {
         type: String,
         unique: true
     },
-    images:{
-        type:String,
+    images: {
+        type: String,
     },
-    title:{
-        type:String,
+    title: {
+        type: String,
     },
-    description:{
-    type:String
+    description: {
+        type: String
     },
-    price:{
-        type:Number
+    price: {
+        type: Number
     },
-    discountPercentage:{
-        type:Number
+    discountPercentage: {
+        type: Number
     },
-    warrantyInformation:{
-        type:String
+    warrantyInformation: {
+        type: String
     },
-    shippingInformation:{
-        type:String
+    shippingInformation: {
+        type: String
     },
-    returnPolicy:{
-        type:String
+    returnPolicy: {
+        type: String
     },
-    productCount:{
-        type:Number,
-        default:1
+    productCount: {
+        type: Number,
+        default: 1
     },
     stock: {
         type: Number

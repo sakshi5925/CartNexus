@@ -4,7 +4,6 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import { RiDiscountPercentLine } from "react-icons/ri";
-
 const steps = ['Cart', 'Address', 'Payment', 'Summary'];
 
 export const Paymentprocess = ({ step }) => {
@@ -79,49 +78,50 @@ export const Pricedetail = ({ products }) => {
     let totalDiscount = 0;
 
     products.forEach((product) => {
-      totalProducts += product.productCount; // Sum of all product quantities
-      totalPrice += product.price * product.productCount; // Total price before discount
-      totalDiscount += (product.price * product.discountPercentage / 100) * product.productCount; // Total discount
+      totalProducts += product.productCount; 
+      totalPrice += product.price * product.productCount; 
+      totalDiscount += (product.price * product.discountPercentage / 100) * product.productCount; 
     });
 
     setData({
       totalProducts,
-      totalPrice: parseFloat(totalPrice.toFixed(1)),  // Round to 1 decimal
-      totalDiscount: parseFloat(totalDiscount.toFixed(1)),  // Round to 1 decimal
-      totalOrderPrice: parseFloat((totalPrice - totalDiscount).toFixed(1)) // Final order price after discount
+      totalPrice: parseFloat(totalPrice.toFixed(2)),  
+      totalDiscount: parseFloat(totalDiscount.toFixed(2)),  
+      totalOrderPrice: parseFloat((totalPrice - totalDiscount).toFixed(2)) 
     });
-  }, [products]); // Runs when 'products' array changes
+  }, [products]); 
 
   return (
-    <div className='p-8 flex flex-col  w-[150rem] h-[35rem] '>
-      <div className='border-2 p-6'>
-        <h3 className='text-xl font-bold'>Total Products: {data.totalProducts}</h3>
-        <div className='flex justify-between mt-5 text-xl text-gray-400'>
+    <div className="p-6 flex flex-col bg-white rounded-lg">
+      <div className="p-6">
+        <h3 className="text-2xl font-bold text-gray-800">Total Products: {data.totalProducts}</h3>
+        <div className="flex justify-between mt-5 text-xl text-gray-600">
           <h2>Total Product Price </h2>
-          <h2>+${data.totalPrice}</h2>
+          <h2 className="font-semibold">+${data.totalPrice}</h2>
         </div>
-        <div className='flex justify-between text-xl mt-3 text-green-400 mb-5 font-bold'>
+        <div className="flex justify-between text-xl mt-3 text-green-500 mb-5 font-bold">
           <h2>Total Discount </h2>
           <h2>-${data.totalDiscount}</h2>
         </div>
-        <hr></hr>
-        <div className='flex justify-between mt-5 text-2xl font-bold'>
+        <hr className="border-gray-300"></hr>
+        <div className="flex justify-between mt-5 text-2xl font-bold text-gray-900">
           <h2>Order Total </h2>
           <h2>${data.totalOrderPrice}</h2>
         </div>
-        <div className='h-14 bg-green-200 flex text-green-600 justify-center items-center mt-8  '>
-          <b className='text-4xl m-1'><RiDiscountPercentLine /></b>
-          <p className='text-xl font-bold '>
-            Yay! Your total discount is ${data.totalDiscount}</p>
+
+        <div className="h-14 bg-green-200 flex text-green-600 justify-center items-center mt-8 rounded-lg shadow-md">
+          <b className="text-4xl m-1"><RiDiscountPercentLine /></b>
+          <p className="text-lg font-bold">
+            Yay! Your total discount is <span className="text-green-700">${data.totalDiscount}</span>
+          </p>
         </div>
-        <div className='flex flex-col mt-8'>
-          <h3 className='m-auto font-bold mb-3'>Clicking on 'Continue' will not deduct any money</h3>
-          <div className='h-14 bg-pink-700 flex text-white justify-center items-center font-bold text-xl'>
-            Continue
-          </div>
+
+        <div className="flex flex-col mt-8 text-center">
+          <h3 className="font-bold text-gray-600">
+            Clicking on 'Continue' will not deduct any money
+          </h3>
         </div>
       </div>
-
     </div>
-  )
-}
+  );
+};

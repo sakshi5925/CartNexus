@@ -4,6 +4,8 @@ import { productRoutes } from './routes/productRoutes.js';
 import cors from 'cors'
 import { connectToDatabase } from './config/connectionToDatabase.js';
 import { authRoutes } from './routes/authRoutes.js';
+import { userRoutes } from './routes/userRoutes.js';
+// import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -23,8 +25,11 @@ app.use(cors({
     credentials: true
 }));
 
+// app.use(cookieParser);
+
 app.use('/product', productRoutes);
 app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 
 // http://localhost:3000/auth/signup
 

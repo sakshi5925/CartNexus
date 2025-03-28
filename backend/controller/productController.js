@@ -16,10 +16,12 @@ export const AddToCart = async (req, res) => {
       productCount,
     } = req.body;
 
+    const { id: userId } = req.params; // Extract id properly
 
     console.log("Received data:", req.body);
+    console.log("userId:", userId);
 
-    const checkProduct = await Product.findOne({ id: id });
+    const checkProduct = await Product.findOne({ id: id, userId: userId });
 
     if (checkProduct) {
       const updatedProduct = await Product.findByIdAndUpdate(
@@ -35,6 +37,7 @@ export const AddToCart = async (req, res) => {
       });
     } else {
       const newProduct = new Product({
+        userId, // Ensure userId is correctly assigned
         id,
         images,
         title,
@@ -69,10 +72,16 @@ export const AddToCart = async (req, res) => {
 
 export const getProduct = async (req, res) => {
   try {
-    const products = await mongoose.connection.db.collection("products").find({}).toArray();
+    const userId = req.params.id; 
+    console.log("Received userId:", userId);
+
+    // Convert userId to ObjectId
+    const objectUserId = new mongoose.Types.ObjectId(userId);
+
+    // Query the database
+    const products = await Product.find({ userId: objectUserId });
+
     console.log("Direct DB Query Result:", products);
-
-
 
     if (products.length === 0) {
       return res.status(200).json({
